@@ -36,12 +36,12 @@ void insertAtEnd(int value) {
     // Set the value of the new node
     newNode->data = value;
     newNode->next = NULL;
-
+/*
     if (head == NULL) {
         newNode->prev = NULL;
         head = newNode;
         return;
-    }
+    }*/
 
     // Traverse to the end of the list
     while (temp->next != NULL) {
@@ -57,24 +57,24 @@ void insertAtPosition(int position, int value) {
     // Create a new node
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     struct Node* temp = head;
-    int count = 1;
+    int count = 0;
 
     // Set the value of the new node
     newNode->data = value;
 
-    // Handle insertion at the beginning separately
-    if (position == 1 || head == NULL) {
-        newNode->next = head;
-        newNode->prev = NULL;
-        if (head != NULL) {
-            head->prev = newNode;
-        }
-        head = newNode;
-        return;
-    }
+    // // Handle insertion at the beginning separately
+    // if (position == 1 || head == NULL) {
+    //     newNode->next = head;
+    //     newNode->prev = NULL;
+    //     if (head != NULL) {
+    //         head->prev = newNode;
+    //     }
+    //     head = newNode;
+    //     return;
+    // }
 
     // Traverse to the specified position or to the end of the list
-    while (temp != NULL && count < position) {
+    while (count < position-1) {
         temp = temp->next;
         count++;
     }
@@ -119,11 +119,11 @@ void deleteAtEnd() {
         temp = temp->next;
     }
 
-    if (temp->prev != NULL) {
+   // if (temp->prev != NULL) {
         temp->prev->next = NULL;
-    } else {
-        head = NULL;
-    }
+   // } else {
+       // head = NULL;
+    //}
 
     free(temp);
 }
@@ -187,6 +187,7 @@ void displayList() {
         printf("%d ", temp->data);
         temp = temp->prev;
     }
+    printf("\n");
     printf("\n");
 }
 

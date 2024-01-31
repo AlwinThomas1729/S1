@@ -31,10 +31,7 @@ void insertAtEnd(int value) {
     newNode->data = value;
     newNode->next = NULL;
 
-    if (head == NULL) {
-        head = newNode;
-        return;
-    }
+   
 
     // Traverse to the end of the list
     while (temp->next != NULL) {
@@ -50,20 +47,15 @@ void insertAtPosition(int position, int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     struct Node* temp = head;
     struct Node* prev = NULL;
-    int count = 1;
+    int count = 0;
 
     // Set the value of the new node
     newNode->data = value;
 
     // Handle insertion at the beginning separately
-    if (position == 1) {
-        newNode->next = head;
-        head = newNode;
-        return;
-    }
-
-    // Traverse to the specified position or to the end of the list
-    while (temp != NULL && count < position) {
+    
+    // Traverse to the specified position or to the end of the list  temp != NULL &&
+    while ( count < position-1) {
         prev = temp;
         temp = temp->next;
         count++;
@@ -99,11 +91,8 @@ void deleteAtEnd() {
         temp = temp->next;
     }
 
-    if (prev == NULL) {
-        head = NULL;
-    } else {
+    
         prev->next = NULL;
-    }
 
     free(temp);
 }
@@ -116,27 +105,22 @@ void deleteAtPosition(int position) {
 
     struct Node* temp = head;
     struct Node* prev = NULL;
-    int count = 1;
+    int count = 0;
 
-    if (position == 1) {
-        head = temp->next;
-        free(temp);
-        return;
-    }
+    // Handle deletion at the beginning separately
 
-    for (int i = 1; temp != NULL && i < position; i++) {
+    // Traverse to the specified position or to the end of the list
+    while (count < position-1) {
         prev = temp;
         temp = temp->next;
+        count++;
     }
 
-    if (temp == NULL) {
-        printf("Invalid position.\n");
-        return;
-    }
-
+    // Delete the node at the specified position
     prev->next = temp->next;
     free(temp);
 }
+
 
 void displayList() {
     struct Node* temp = head;
